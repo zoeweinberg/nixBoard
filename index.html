@@ -11,15 +11,16 @@
 
 <body>
   <button onclick="setTimeout(myFunction, 3000);">Try it</button>
-  <button onclick="var limit=100; setInterval(myRand);">myRand</button>
+  <button onclick="setInterval(myRand, 100);">myRand</button>
 
 	<script>
 	  function myFunction() {
 	      alert('Hello');
 	  }
-	  var limit = 100;
+	  var limit = 200;
+	  var stepCounter=0;
 	  function myRand() {
-	      if (limit>0) {
+	      if (stepCounter<limit) {
 		  var x_,y_;
 		  do {
 		      
@@ -27,12 +28,16 @@
 		      y_ = Math.floor(Math.random()*19);
 		  }while(pan[x_][y_] != 0);
 
-		  console.log(limit);
+		  //console.log(limit);
 		  play(x_, y_, move_count);
 		  
 		  showPan();
 		  
-		  limit--;
+		  stepCounter++;
+	      } else {
+		  stepCounter=0;
+		  moveCounter=0;//fixit
+		  reset();
 	      }
 	  }
 	</script>

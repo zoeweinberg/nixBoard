@@ -5,7 +5,16 @@
 */
 
 /* some global values */
-var pan = new Array(
+var pan; //array goboard / goban
+var shadow; // array same size
+
+//defined below 
+var jie;// = new Array();
+var move_record;// = new Array();
+
+function reset() {
+    /* some global values */
+    pan = new Array(
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -25,8 +34,8 @@ var pan = new Array(
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-);
-var shadow = new Array(
+    );
+    shadow = new Array(
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -46,12 +55,16 @@ var shadow = new Array(
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-);
-var jie = new Array();
-var move_record = new Array();
+    );
+    jie = new Array();
+    move_record = new Array();
+    console.log("reset");
+}
+
+reset();
 
 function showPan() {
-    console.log("showPan");
+    //console.log("showPan");
 	var c = document.getElementById("weiqi");
 	var cxt = c.getContext("2d");
 	cxt.strokeStyle="black";
