@@ -51,6 +51,7 @@ var jie = new Array();
 var move_record = new Array();
 
 function showPan() {
+    console.log("showPan");
 	var c = document.getElementById("weiqi");
 	var cxt = c.getContext("2d");
 	cxt.strokeStyle="black";

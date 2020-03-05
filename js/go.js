@@ -4,7 +4,7 @@
 	license: GPL
 */
 
-var shouldRandom=true;
+var shouldRandom=false;
 
 function grid(cxt) {
 	// the first point is (30, 30)
@@ -85,11 +85,13 @@ function mousedownHandler(e) {
 }
 
 function repeatRandom(limit) {
+    /*
     var t1=performance.now();
     var t2;
     while (limit > 0) {
 	t2 = performance.now();
 	if (t2-t1>10) {
+*/
 	    var x_,y_;
 	    do {
 		
@@ -99,12 +101,16 @@ function repeatRandom(limit) {
 
 	    console.log(limit);
 	    play(x_, y_, move_count);
-	    showPan();
-
+	    //showPan();
+	    setTimeout(showPan(),3000);
+	    
 	    limit--;
-	    t1=performance.now();
+/*
+    t1=performance.now();
 	}
-    }
+}
+*/
+
 }
 
 function mousemoveHandler(e) {
