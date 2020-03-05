@@ -4,6 +4,8 @@
 	license: GPL
 */
 
+var shouldRandom=true;
+
 function grid(cxt) {
 	// the first point is (30, 30)
 	for (var i = 0; i < 19; i++) {
@@ -68,21 +70,41 @@ function mousedownHandler(e) {
 	if (!xok || !yok)
 		return;
 
-	play(x_, y_, move_count);
-	showPan();
-	// now we put the new stone on the board
-	/*
-	move_count ++;
-	var c = document.getElementById("weiqi");
-	var cxt = c.getContext("2d");
-	cxt.beginPath();
-	cxt.arc(x,y,15,0,2*Math.PI,false);
-	if (move_count % 2 == 1)
-		cxt.fillStyle="black";
-	else
-		cxt.fillStyle="white";
-	cxt.fill();
-	*/
+//    for (var i = 0; i<300; i++) {
+	if (shouldRandom) {
+	    var limit = 200;
+	    //setTimeout(repeatRandom(limit), 300);
+	    //setInterval(repeatRandom(limit),10000);
+	    repeatRandom(limit);
+	} else {
+    
+	    play(x_, y_, move_count);
+	    showPan();
+	}
+  //  }
+}
+
+function repeatRandom(limit) {
+    var t1=performance.now();
+    var t2;
+    while (limit > 0) {
+	t2 = performance.now();
+	if (t2-t1>10) {
+	    var x_,y_;
+	    do {
+		
+		x_ = Math.floor(Math.random()*19);
+		y_ = Math.floor(Math.random()*19);
+	    }while(pan[x_][y_] != 0);
+
+	    console.log(limit);
+	    play(x_, y_, move_count);
+	    showPan();
+
+	    limit--;
+	    t1=performance.now();
+	}
+    }
 }
 
 function mousemoveHandler(e) {
@@ -144,6 +166,7 @@ function initBoard() {
 	c_path.addEventListener('mousemove', mousemoveHandler, false);
 	c_path.addEventListener('mouseout', mouseoutHandler, false);
 
+    
 	var c_weiqi = document.getElementById("weiqi");
 	var cxt = c_weiqi.getContext("2d");
 	cxt.fillStyle = "silver";
@@ -152,7 +175,8 @@ function initBoard() {
 	grid(cxt);
 	ninePoints(cxt);
 
-	showPan();
+    showPan();
+    //setInterval(repeatRandom(200 /*limit*/),10000);
 }
 
 function addLoadEvent(func) {

@@ -141,6 +141,35 @@ function showPan() {
 	}
 }
 
+function randomPlay() {
+    var x=Math.random()*19;
+    var y=Math.random()*19;
+
+    var c = document.getElementById("path");
+    var cxt = c.getContext("2d");
+
+    // clear the path
+    cxt.clearRect(0,0,600,600);
+
+    // put a new Gray stone
+    cxt.beginPath();
+    cxt.arc(x,y,15,0,2*Math.PI,false);
+    cxt.fillStyle="gray";
+    cxt.fill();
+
+    cxt.beginPath();
+    cxt.arc(x,y,10,0,2*Math.PI,false);
+    if (move_count % 2 == 0)
+	cxt.fillStyle="black";
+    else
+	cxt.fillStyle="white";
+    cxt.fill();
+
+    //from go.js mouseDown
+    play(x, y, move_count);
+    showPan();
+}
+
 function play(row, col) {
 	if (row < 0 || row > 19 || col < 0 || col > 19) {
 		alert("index error....");
