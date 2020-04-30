@@ -252,14 +252,7 @@
 	      }
 
 	      var pokemonTurnInterval;
-
-	      function play_pokemon_turn1(){
-		  play_pokemon_turn("weiqi");
-	      }
-	      function play_pokemon_turn2(){
-		  play_pokemon_turn("weiqi2");
-	      }
-	      function play_pokemon_turn(boardIdString) {
+	      function play_pokemon_turn() {
 		  
 
 		  //let's make things simple and use AGA rules
@@ -321,9 +314,9 @@
 
 		      //black traditionally has 181 stones, white has 180
 		      pokemonTurnCounter=0;
-		      pokemonTurnInterval=setInterval(play_pokemon_turn1,
+		      pokemonTurnInterval=setInterval(play_pokemon_turn,
 						      pokemon_delay);
-		      pokemonTurnInterval=setInterval(play_pokemon_turn2,pokemon_delay);
+
 		      
 		      
 		      j++;
@@ -334,7 +327,9 @@
 
 	  function evolve(){
 	      var b1 = new Board("weiqi");
+	      var b2 = new Board("weiqi2");
 	      b1.evolve();
+	      b2.evolve();
 	  }
 	  
 	  var limit = 500;
