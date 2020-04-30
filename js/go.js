@@ -4,8 +4,6 @@
 	license: GPL
 */
 
-var shouldRandom=false;
-
 function grid(cxt) {
 	// the first point is (30, 30)
 	for (var i = 0; i < 19; i++) {
@@ -70,47 +68,9 @@ function mousedownHandler(e) {
 	if (!xok || !yok)
 		return;
 
-//    for (var i = 0; i<300; i++) {
-	if (shouldRandom) {
-	    var limit = 200;
-	    //setTimeout(repeatRandom(limit), 300);
-	    //setInterval(repeatRandom(limit),10000);
-	    repeatRandom(limit);
-	} else {
     
-	    play(x_, y_, move_count);
-	    showPan();
-	}
-  //  }
-}
-
-function repeatRandom(limit) {
-    /*
-    var t1=performance.now();
-    var t2;
-    while (limit > 0) {
-	t2 = performance.now();
-	if (t2-t1>10) {
-*/
-	    var x_,y_;
-	    do {
-		
-		x_ = Math.floor(Math.random()*19);
-		y_ = Math.floor(Math.random()*19);
-	    }while(pan[x_][y_] != 0);
-
-	    console.log(limit);
-	    play(x_, y_, move_count);
-	    //showPan();
-	    setTimeout(showPan(),3000);
-	    
-	    limit--;
-/*
-    t1=performance.now();
-	}
-}
-*/
-
+    play(x_, y_, true, "weiqi"); //could have option to play on 2nd board but
+    // not really necessary yet for training the forfeiting bots
 }
 
 function mousemoveHandler(e) {
@@ -166,23 +126,30 @@ function mouseoutHandler(e) {
 	cxt.clearRect(0,0,600,600);
 }
 
-function initBoard() {
-	var c_path = document.getElementById("path");
-	c_path.addEventListener('mousedown', mousedownHandler, false);
-	c_path.addEventListener('mousemove', mousemoveHandler, false);
-	c_path.addEventListener('mouseout', mouseoutHandler, false);
-
+function initSimultaneousGame(boardIdString) {
     
-	var c_weiqi = document.getElementById("weiqi");
+	var c_weiqi = document.getElementById(boardIdString);
 	var cxt = c_weiqi.getContext("2d");
 	cxt.fillStyle = "silver";
 	cxt.fillRect(0,0,600,600);
 
 	grid(cxt);
 	ninePoints(cxt);
+}
 
-    showPan();
-    //setInterval(repeatRandom(200 /*limit*/),10000);
+function initSimultaneousPath(pathIdString){
+    var c_path = document.getElementById(pathIdString);
+	c_path.addEventListener('mousedown', mousedownHandler, false);
+	c_path.addEventListener('mousemove', mousemoveHandler, false);
+	c_path.addEventListener('mouseout', mouseoutHandler, false);
+}
+function initBoard() {
+    initSimultaneousPath("path");
+    initSimultaneousPath("path2");
+    initSimultaneousGame("weiqi");
+    initSimultaneousGame("weiqi2");
+    showPan("weiqi");
+    showPan("weiqi2");
 }
 
 function addLoadEvent(func) {
