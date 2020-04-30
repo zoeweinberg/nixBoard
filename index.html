@@ -38,11 +38,11 @@
 	  }
 
 	  
-	  var Board = function(){ //some sort of Object/Class
+	  var Board = function(boardIdString){ //some sort of Object/Class
 	      var prevPlayerPassed=false;
 	      var stepCounter=0;
 	      var pause=false;
-	      function fullReset(boardIdString){
+	      function fullReset(){
 		  //document.getElementById("message").innerHTML = "New game!";
 		  stepCounter=0;
 		  move_count=0;
@@ -299,7 +299,7 @@
 	      }
 
 	      var evolving =true;//false;
-	      evolve : function (){
+	      Board.prototype.evolve = function (){
 		  
 		  
 		  for(var i=0; i<numChoices; i++) {
